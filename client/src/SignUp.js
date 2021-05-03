@@ -1,8 +1,9 @@
 import withRoot from './withroot';
 import React from 'react';
-import { Field, Form, FormSpy } from 'react-final-form';
 import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
+import { Field, Form, FormSpy } from 'react-final-form';
 import Typography from './components/Typography';
 import AppAppBar from './views/AppAppBar';
 import AppForm from './views/AppForm';
@@ -24,12 +25,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SignIn() {
+function SignUp() {
   const classes = useStyles();
   const [sent, setSent] = React.useState(false);
 
   const validate = (values) => {
-    const errors = required(['email', 'password'], values);
+    const errors = required(['firstName', 'lastName', 'email', 'password'], values);
 
     if (!errors.email) {
       const emailError = email(values.email, values);
@@ -51,21 +52,42 @@ function SignIn() {
       <AppForm>
         <React.Fragment>
           <Typography variant="h3" gutterBottom marked="center" align="center">
-            Sign In
+            Sign Up
           </Typography>
           <Typography variant="body2" align="center">
-            {'Not a member yet? '}
-            <Link href="/register" align="center" underline="always">
-              Sign Up here
+            <Link href="/login" underline="always">
+              Already have an account?
             </Link>
           </Typography>
         </React.Fragment>
         <Form onSubmit={handleSubmit} subscription={{ submitting: true }} validate={validate}>
           {({ handleSubmit2, submitting }) => (
             <form onSubmit={handleSubmit2} className={classes.form} noValidate>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={6}>
+                  <Field
+                    autoFocus
+                    component={RFTextField}
+                    autoComplete="fname"
+                    fullWidth
+                    label="First name"
+                    name="firstName"
+                    required
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Field
+                    component={RFTextField}
+                    autoComplete="lname"
+                    fullWidth
+                    label="Last name"
+                    name="lastName"
+                    required
+                  />
+                </Grid>
+              </Grid>
               <Field
                 autoComplete="email"
-                autoFocus
                 component={RFTextField}
                 disabled={submitting || sent}
                 fullWidth
@@ -73,11 +95,9 @@ function SignIn() {
                 margin="normal"
                 name="email"
                 required
-                size="large"
               />
               <Field
                 fullWidth
-                size="large"
                 component={RFTextField}
                 disabled={submitting || sent}
                 required
@@ -99,23 +119,17 @@ function SignIn() {
               <FormButton
                 className={classes.button}
                 disabled={submitting || sent}
-                size="large"
                 color="secondary"
                 fullWidth
               >
-                {submitting || sent ? 'In progress…' : 'Sign In'}
+                {submitting || sent ? 'In progress…' : 'Sign Up'}
               </FormButton>
             </form>
           )}
         </Form>
-        <Typography align="center">
-          <Link underline="always" href="#">
-            Forgot password?
-          </Link>
-        </Typography>
       </AppForm>
     </React.Fragment>
   );
 }
 
-export default withRoot(SignIn);
+export default withRoot(SignUp);

@@ -10,6 +10,7 @@ import Home from "./components/home.component";
 import {Header} from "./components/header.component";
 import AppAppBar from "./views/AppAppBar";
 import SignIn from './SignIn';
+import SignUp from './SignUp';
 
 class App extends Component {
   constructor(props) {
@@ -48,7 +49,7 @@ class App extends Component {
           <Switch>
             <Route exact path={["/", "/home"]} component={Home} />
             <Route exact path="/login" component={SignIn} />
-            <Route exact path="/register" component={Register} />
+            <Route exact path="/register" component={SignUp} />
           </Switch>
         </div>
       </div>
