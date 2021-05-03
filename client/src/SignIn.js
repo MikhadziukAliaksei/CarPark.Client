@@ -1,5 +1,5 @@
 import withRoot from './withroot';
-import React from 'react';
+import React, { useState,useEffect } from 'react';
 import { Field, Form, FormSpy } from 'react-final-form';
 import { makeStyles } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
@@ -10,6 +10,7 @@ import { email, required } from './components/form/validation';
 import RFTextField from './components/form/RFTestField';
 import FormButton from './components/form/FormButton';
 import FormFeedback from './components/form/FormFeedback';
+import AuthService from './services/auth.service'
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -27,6 +28,9 @@ const useStyles = makeStyles((theme) => ({
 function SignIn() {
   const classes = useStyles();
   const [sent, setSent] = React.useState(false);
+  const [login,setLogin]=useState(null);
+  const [password,setPassword]=useState(null);
+  const [message,setMessage]=useState(null);
 
   const validate = (values) => {
     const errors = required(['email', 'password'], values);
@@ -36,14 +40,30 @@ function SignIn() {
       if (emailError) {
         errors.email = email(values.email, values);
       }
+      setLogin(values.email)
+      setPassword(values.password)
     }
-
     return errors;
   };
 
-  const handleSubmit = () => {
-    setSent(true);
-  };
+  const handleLogin=(e)=>
+  {
+    e.preventDefault();
+    AuthService.login(login,password).then(
+      error => {
+        const resMessage =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+          setMessage(resMessage)
+      }
+    ).then(setSent(true));
+    //console.log("ok");
+  }
+
+
 
   return (
     <React.Fragment>
@@ -60,9 +80,9 @@ function SignIn() {
             </Link>
           </Typography>
         </React.Fragment>
-        <Form onSubmit={handleSubmit} subscription={{ submitting: true }} validate={validate}>
-          {({ handleSubmit2, submitting }) => (
-            <form onSubmit={handleSubmit2} className={classes.form} noValidate>
+        <Form onSubmit={handleLogin} subscription={{ submitting: true }} validate={validate}>
+          {({ submitting }) => (
+            <form onSubmit={handleLogin} className={classes.form} noValidate>
               <Field
                 autoComplete="email"
                 autoFocus
@@ -96,12 +116,14 @@ function SignIn() {
                   ) : null
                 }
               </FormSpy>
+      {message && console.log(message)}
               <FormButton
                 className={classes.button}
                 disabled={submitting || sent}
                 size="large"
                 color="secondary"
                 fullWidth
+              
               >
                 {submitting || sent ? 'In progress…' : 'Sign In'}
               </FormButton>
