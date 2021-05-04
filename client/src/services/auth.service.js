@@ -2,8 +2,12 @@ import axios from "axios";
 
 const API_URL = "https://localhost:5001/api/authentication/";
 
+<<<<<<< Updated upstream
 export default class AuthService {
 
+=======
+class AuthService {
+>>>>>>> Stashed changes
   login(email, password) {
     return axios
       .post(API_URL + "login", {
@@ -16,7 +20,11 @@ export default class AuthService {
 
           localStorage.setItem("user", JSON.stringify(response.data));
         }
+<<<<<<< Updated upstream
 
+=======
+        
+>>>>>>> Stashed changes
         return response.data;
       });
   }
@@ -37,3 +45,5 @@ export default class AuthService {
     return JSON.parse(localStorage.getItem('user'));;
   }
 }
+
+export default new AuthService();
