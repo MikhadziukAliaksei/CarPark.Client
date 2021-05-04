@@ -31,20 +31,22 @@ class App extends Component {
     }
   }
 
-  logOut() {
+  logOut() {//не понимаю зачем оно здесь
     AuthService.logout();
   }
 
   render() {
-    
+
     return (
       <div>
-        <AppAppBar />
+        <AppAppBar isAuth={!!currentUser} />
         <div className="container mt-3">
           <Switch>
             <Route exact path={["/", "/home"]} component={Home} />
             <Route exact path="/login" component={SignIn} />
             <Route exact path="/register" component={SignUp} />
+            {/*вот здесь я не уверена по поводу роута,можно убрать и при логайте перенаправлять на главную прямо в коде
+            я попробую,если не сработает вставить эту строчку:  <Route exact path="/logout" component={Home} />*/}
           </Switch>
         </div>
       </div>
