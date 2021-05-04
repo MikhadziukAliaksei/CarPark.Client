@@ -2,24 +2,34 @@ import axios from "axios";
 
 const API_URL = "https://localhost:5001/api/authentication/";
 
-class AuthService {
-  login(username, password) {
+export default class AuthService {
+  constructor(props) {
+    super(props);
+  this.state = {
+    isAuth : false
+  };
+}
+
+  login(email, password) {
     return axios
       .post(API_URL + "login", {
-        username,
+        email,
         password
       })
       .then(response => {
-        if (response.data.accessToken) {
+        console.log(response)
+        if (response.data.token) {
+          
           localStorage.setItem("user", JSON.stringify(response.data));
         }
         
-        return response.data;
+        return response.data && this.state.isAuth(true);
       });
   }
 
   logout() {
     localStorage.removeItem("user");
+    this.state.isAuth(false);
   }
 
   register(username, email, password) {
@@ -34,5 +44,3 @@ class AuthService {
     return JSON.parse(localStorage.getItem('user'));;
   }
 }
-
-export default new AuthService();
