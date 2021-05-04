@@ -5,7 +5,6 @@ import { withStyles } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
 import AppBar from '../components/AppBar';
 import Toolbar, { styles as toolbarStyles } from '../components/Toolbar.js';
-import { AuthService } from '../services/auth.service';
 
 const styles = (theme) => ({
   title: {
@@ -38,41 +37,6 @@ const styles = (theme) => ({
 
 function AppAppBar(props) {
   const { isAuth, classes } = props;
-  const showSignInSignOnButtons = () => {
-    return (<div className={classes.right}>
-      <Link
-        color="inherit"
-        variant="h6"
-        underline="none"
-        className={classes.rightLink}
-        href="/login"
-      >
-        {'Sign In'}
-      </Link>
-      <Link
-        variant="h6"
-        underline="none"
-        className={clsx(classes.rightLink, classes.linkSecondary)}
-        href="/register"
-      >
-        {'Sign Up'}
-      </Link>
-    </div>)
-  }
-
-  const showLogoutButton = () => {
-    return (
-      <Link
-        variant="h6"
-        underline="none"
-        className={clsx(classes.rightLink, classes.linkSecondary)}
-        href="/" /*если что здеь напишешь /logout */
-        oncklick={AuthService.logout()}
-      >
-        {'Logout'}
-      </Link>
-    )
-  }
   return (
     <div>
       <AppBar position="fixed">
@@ -86,9 +50,26 @@ function AppAppBar(props) {
             href="#"
           >
             {'CarPark'}
+            <div className={classes.right}>
+            <Link
+              color="inherit"
+              variant="h6"
+              underline="none"
+              className={classes.rightLink}
+              href="/login"
+            >
+              {'Sign In'}
+            </Link>
+            <Link
+              variant="h6"
+              underline="none"
+              className={clsx(classes.rightLink, classes.linkSecondary)}
+              href="/register"
+            >
+              {'Sign Up'}
+            </Link>
+          </div>
           </Link>
-          {isAuth && showSignInSignOnButtons()}
-          {!isAuth && showLogoutButton()}
         </Toolbar>
       </AppBar>
       <div className={classes.placeholder} />

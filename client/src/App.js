@@ -36,7 +36,7 @@ class App extends Component {
     }
   }
 
-  logOut() {//не понимаю зачем оно здесь
+  logOut() {
     AuthService.logout();
   }
 
@@ -44,25 +44,19 @@ class App extends Component {
 
     return (
       <div>
-<<<<<<< Updated upstream
-        <AppAppBar isAuth={!!currentUser} />
-=======
         <AppAppBar />
         <Provider store={store}>
-      <ToastProvider autoDismiss={true}>
-        <Container maxWidth="lg">
-          <DCars />
-        </Container>
-      </ToastProvider>
-    </Provider>
->>>>>>> Stashed changes
+          <ToastProvider autoDismiss={true}>
+            <Container maxWidth="lg">
+              <DCars />
+            </Container>
+          </ToastProvider>
+        </Provider>
         <div className="container mt-3">
           <Switch>
             <Route exact path={["/", "/home"]} component={Home} />
             <Route exact path="/login" component={SignIn} />
             <Route exact path="/register" component={SignUp} />
-            {/*вот здесь я не уверена по поводу роута,можно убрать и при логайте перенаправлять на главную прямо в коде
-            я попробую,если не сработает вставить эту строчку:  <Route exact path="/logout" component={Home} />*/}
           </Switch>
         </div>
       </div>
