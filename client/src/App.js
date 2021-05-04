@@ -8,11 +8,6 @@ import Home from "./components/home.component";
 import AppAppBar from "./views/AppAppBar";
 import SignIn from './SignIn';
 import SignUp from './SignUp';
-import DCars from './components/DCars';
-import { store } from "./actions/store";
-import { Provider } from "react-redux";
-import { Container } from "@material-ui/core";
-import { ToastProvider } from "react-toast-notifications";
 
 class App extends Component {
   constructor(props) {
@@ -44,18 +39,7 @@ class App extends Component {
 
     return (
       <div>
-<<<<<<< Updated upstream
         <AppAppBar isAuth={!!currentUser} />
-=======
-        <AppAppBar />
-        <Provider store={store}>
-      <ToastProvider autoDismiss={true}>
-        <Container maxWidth="lg">
-          <DCars />
-        </Container>
-      </ToastProvider>
-    </Provider>
->>>>>>> Stashed changes
         <div className="container mt-3">
           <Switch>
             <Route exact path={["/", "/home"]} component={Home} />
