@@ -39,12 +39,9 @@ class App extends Component {
   }
 
   render() {
-    const { currentUser, showModeratorBoard, showAdminBoard } = this.state;
-    
     return (
       <div>
         <AppAppBar />
-        <Header  user={currentUser} showModerator={showModeratorBoard} showAdmin={showAdminBoard}/>
         <div className="container mt-3">
           <Switch>
             <Route exact path={["/", "/home"]} component={Home} />

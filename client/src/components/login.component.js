@@ -22,7 +22,7 @@ export default class Login extends Component {
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
     this.state = {
-      username: "",
+      email: "",
       password: "",
       loading: false,
       message: ""
@@ -31,7 +31,7 @@ export default class Login extends Component {
 
   onChangeUsername(e) {
     this.setState({
-      username: e.target.value
+      email: e.target.value
     });
   }
 
@@ -52,7 +52,7 @@ export default class Login extends Component {
     this.form.validateAll();
 
     if (this.checkBtn.context._errors.length === 0) {
-      AuthService.login(this.state.username, this.state.password).then(
+      AuthService.login(this.state.email, this.state.password).then(
         error => {
           const resMessage =
             (error.response &&
