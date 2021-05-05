@@ -4,10 +4,14 @@ import { Switch, Route } from "react-router-dom";
 
 import AuthService from "./services/auth.service";
 import Home from "./components/home.component";
-import {Header} from "./components/header.component";
 import AppAppBar from "./views/AppAppBar";
 import SignIn from './SignIn';
 import SignUp from './SignUp';
+import { store } from "./actions/store";
+import { Provider } from "react-redux";
+import DCars from './components/DCars';
+import { Container } from "@material-ui/core";
+import { ToastProvider } from "react-toast-notifications";
 
 class App extends Component {
   constructor(props) {
@@ -37,11 +41,17 @@ class App extends Component {
 
   render() {
     const { currentUser, showModeratorBoard, showAdminBoard } = this.state;
-    
+
     return (
       <div>
         <AppAppBar />
-        <Header  user={currentUser} showModerator={showModeratorBoard} showAdmin={showAdminBoard}/>
+        <Provider store={store}>
+          <ToastProvider autoDismiss={true}>
+            <Container maxWidth="lg">
+              <DCars />
+            </Container>
+          </ToastProvider>
+        </Provider>
         <div className="container mt-3">
           <Switch>
             <Route exact path={["/", "/home"]} component={Home} />

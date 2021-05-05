@@ -9,54 +9,54 @@ export const ACTION_TYPES = {
 
 const formateData = data => ({
     ...data,
-    age: parseInt(data.age ? data.age : 0)
 })
 
-export const fetchAll = () => dispatch => {
+export const fetchAll = () => dispatch => 
+{
     api.dCars().fetchAll()
-        .then(response => {
-            dispatch({
-                type: ACTION_TYPES.FETCH_ALL,
-                payload: response.data
-            })
+    .then(response => {
+        dispatch({
+            type: ACTION_TYPES.FETCH_ALL,
+            payload: response.data
         })
-        .catch(err => console.log(err))
+    }).catch(err => console.log(err))
 }
 
-export const create = (data, onSuccess) => dispatch => {
+export const create = (data, onSuccess) => dispatch =>
+{
     data = formateData(data)
     api.dCars().create(data)
-        .then(res => {
-            dispatch({
-                type: ACTION_TYPES.CREATE,
-                payload: res.data
-            })
-            onSuccess()
+    .then(response => {
+        dispatch({
+            type: ACTION_TYPES.CREATE,
+            payload: response.data
         })
-        .catch(err => console.log(err))
+        onSuccess()
+    })
+    .catch(err => console.log(err))
 }
 
-export const update = (id, data, onSuccess) => dispatch => {
+export const update = (id, data, onSuccess) => dispatch =>{
     data = formateData(data)
-    api.dCars().update(id, data)
-        .then(res => {
-            dispatch({
-                type: ACTION_TYPES.UPDATE,
-                payload: { id, ...data }
-            })
-            onSuccess()
+    api.dCars.update(id, data)
+    .then(response => {
+        dispatch({
+            type:ACTION_TYPES.UPDATE,
+            payload: {id, ...data}
         })
-        .catch(err => console.log(err))
+        onSuccess()
+    })
+    .catch(err => console.log(err))
 }
 
 export const Delete = (id, onSuccess) => dispatch => {
-    api.dCars().delete(id)
-        .then(res => {
-            dispatch({
-                type: ACTION_TYPES.DELETE,
-                payload: id
-            })
-            onSuccess()
+    api.dCars.delete(id)
+    .then(response => {
+        dispatch({
+            type: ACTION_TYPES.DELETE,
+            payload: id
         })
-        .catch(err => console.log(err))
+        onSuccess()
+    })
+    .catch(err => console.log(err))
 }

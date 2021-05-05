@@ -116,7 +116,6 @@ function SignIn() {
                   ) : null
                 }
               </FormSpy>
-      {message && console.log(message)}
               <FormButton
                 className={classes.button}
                 disabled={submitting || sent}

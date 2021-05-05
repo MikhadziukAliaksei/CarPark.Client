@@ -36,7 +36,7 @@ const styles = (theme) => ({
 });
 
 function AppAppBar(props) {
-  const { isAuth, classes } = props;
+  const { classes } = props;
   return (
     <div>
       <AppBar position="fixed">
@@ -47,7 +47,7 @@ function AppAppBar(props) {
             underline="none"
             color="inherit"
             className={classes.title}
-            href="#"
+            href="/"
           >
             {'CarPark'}
             <div className={classes.right}>
