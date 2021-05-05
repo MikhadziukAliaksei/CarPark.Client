@@ -28,9 +28,9 @@ const useStyles = makeStyles((theme) => ({
 function SignIn() {
   const classes = useStyles();
   const [sent, setSent] = React.useState(false);
-  const [login,setLogin] = useState(null);
-  const [password,setPassword] = useState(null);
-  const [message,setMessage] = useState(null);
+  const [login,setLogin]=useState(null);
+  const [password,setPassword]=useState(null);
+  const [message,setMessage]=useState(null);
 
   const validate = (values) => {
     const errors = required(['email', 'password'], values);
@@ -60,6 +60,7 @@ function SignIn() {
           setMessage(resMessage)
       }
     ).then(setSent(true));
+    //console.log("ok");
   }
 
 
@@ -115,6 +116,7 @@ function SignIn() {
                   ) : null
                 }
               </FormSpy>
+      {message && console.log(message)}
               <FormButton
                 className={classes.button}
                 disabled={submitting || sent}

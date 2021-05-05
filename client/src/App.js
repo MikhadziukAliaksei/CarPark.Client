@@ -4,7 +4,10 @@ import { Switch, Route } from "react-router-dom";
 
 import AuthService from "./services/auth.service";
 
+import Login from "./components/login.component";
+import Register from "./components/register.component";
 import Home from "./components/home.component";
+import {Header} from "./components/header.component";
 import AppAppBar from "./views/AppAppBar";
 import SignIn from './SignIn';
 import SignUp from './SignUp';
@@ -41,6 +44,7 @@ class App extends Component {
   }
 
   render() {
+<<<<<<< HEAD
 
     return (
       <div>
@@ -52,6 +56,14 @@ class App extends Component {
             </Container>
           </ToastProvider>
         </Provider>
+=======
+    const { currentUser, showModeratorBoard, showAdminBoard } = this.state;
+    
+    return (
+      <div>
+        <AppAppBar />
+        <Header  user={currentUser} showModerator={showModeratorBoard} showAdmin={showAdminBoard}/>
+>>>>>>> parent of 38b67b5 (added service)
         <div className="container mt-3">
           <Switch>
             <Route exact path={["/", "/home"]} component={Home} />

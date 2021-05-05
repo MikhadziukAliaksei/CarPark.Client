@@ -30,7 +30,7 @@ function SignUp() {
   const [sent, setSent] = React.useState(false);
 
   const validate = (values) => {
-    const errors = required(['firstName', 'secondName', 'email', 'password'], values);
+    const errors = required(['firstName', 'lastName', 'email', 'password'], values);
 
     if (!errors.email) {
       const emailError = email(values.email, values);

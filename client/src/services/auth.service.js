@@ -2,19 +2,31 @@ import axios from "axios";
 
 const API_URL = "https://localhost:5001/api/authentication/";
 
+<<<<<<< HEAD
 export default class AuthService {
   login(email, password) {
+=======
+class AuthService {
+  login(username, password) {
+>>>>>>> parent of 38b67b5 (added service)
     return axios
       .post(API_URL + "login", {
-        email,
+        username,
         password
       })
       .then(response => {
+<<<<<<< HEAD
         console.log(response)
         if (response.data.token) {
 
           localStorage.setItem("user", JSON.stringify(response.data));
         }
+=======
+        if (response.data.accessToken) {
+          localStorage.setItem("user", JSON.stringify(response.data));
+        }
+        
+>>>>>>> parent of 38b67b5 (added service)
         return response.data;
       });
   }
@@ -35,3 +47,5 @@ export default class AuthService {
     return JSON.parse(localStorage.getItem('user'));;
   }
 }
+
+export default new AuthService();
