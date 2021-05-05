@@ -44,7 +44,7 @@ class App extends Component {
 
     return (
       <div>
-        <AppAppBar />
+        {/* <AppAppBar /> */}
         <Provider store={store}>
           <ToastProvider autoDismiss={true}>
             <Container maxWidth="lg">

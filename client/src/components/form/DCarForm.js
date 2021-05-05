@@ -44,7 +44,7 @@ const DCarForm = ({classes, ...props}) => {
             temp.model = fieldValues.model ? "" : "This field is required."
         if ('color' in fieldValues)
             temp.color = fieldValues.color ? "" : "This field is required."
-        if ('price' in fieldValues.price)
+        if ('price' in fieldValues)
             temp.price = fieldValues.price ? "" : "This field is required."
         if ('yearOfIssue' in fieldValues)
             temp.yearOfIssue = fieldValues.yearOfIssue ? "" :"This field is required."
@@ -144,6 +144,7 @@ const DCarForm = ({classes, ...props}) => {
                         label = "Price"
                         value = {values.price}
                         onChange = {handleInputChange}
+                        {...(errors.color && {error: true, helperText: errors.color})}
                     />
                     <TextField
                         name = 'yearOfIssue'
@@ -151,6 +152,7 @@ const DCarForm = ({classes, ...props}) => {
                         label = "YearOfIssue"
                         value = {values.yearOfIssue}
                         onChange = {handleInputChange}
+                        {...(errors.color && {error: true, helperText: errors.color})}
                     />
                     <div>
                         <Button
