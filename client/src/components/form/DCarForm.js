@@ -34,6 +34,8 @@ const initialFieldValues = {
 }
 
 const DCarForm = ({classes, ...props}) => {
+    {console.dir(props)}
+
     const {addToast} = useToasts()
 
     const validate = (fieldValues = values) => {

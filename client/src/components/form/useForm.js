@@ -19,6 +19,7 @@ const useForm = (initialFieldValues, validate, setCurrentId) => {
             ...initialFieldValues
         })
         setErrors({})
+        //console.dir(typeof setCurrentId());
         setCurrentId(0)
     }
 

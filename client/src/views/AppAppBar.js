@@ -41,7 +41,7 @@ function AppAppBar(props) {
     <div>
       <AppBar position="fixed">
         <Toolbar className={classes.toolbar}>
-          <div className={classes.left} />
+          <div className={classes.left} >
           <Link
             variant="h6"
             underline="none"
@@ -50,6 +50,8 @@ function AppAppBar(props) {
             href="/"
           >
             {'CarPark'}
+            </Link>
+</div>
             <div className={classes.right}>
             <Link
               color="inherit"
@@ -69,7 +71,6 @@ function AppAppBar(props) {
               {'Sign Up'}
             </Link>
           </div>
-          </Link>
         </Toolbar>
       </AppBar>
       <div className={classes.placeholder} />

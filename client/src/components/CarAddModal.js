@@ -59,6 +59,7 @@ export default function CarAddModal() {
                 <Fade in={open}>
                     <div className = {classes.paper}>
                         <h2 id= "transition-modal-title">ADD NEW CAR</h2>
+                        
                         <DCarForm {...({ currentId, setCurrentId })} />
                     </div>
                 </Fade>
