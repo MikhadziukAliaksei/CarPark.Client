@@ -31,15 +31,14 @@ const DCars = ({ classes, ...props }) => {
 
     const onDelete = id => {
         if (window.confirm('Are you sure to delete this record?'))
-            props.deleteDCandidate(id, () => addToast("Deleted successfully", { appearance: 'info' }))
+            props.deleteDCar(id, () => addToast("Deleted successfully", { appearance: 'info' }))
     }
     return (
         <Paper className={classes.paper} elevation={3}>
             <Grid container>
                 <Grid item xs={6}>
-                    <DCarForm {...({ currentId, setCurrentId })} />
                 </Grid>
-
+                <CarAddModal />
                 <Grid >
                     <TableContainer>
                         <Table>

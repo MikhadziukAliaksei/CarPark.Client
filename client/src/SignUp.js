@@ -1,5 +1,5 @@
 import withRoot from './withroot';
-import React from 'react';
+import React , {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
@@ -11,6 +11,7 @@ import { email, required } from './components/form/validation';
 import RFTextField from './components/form/RFTestField';
 import FormButton from './components/form/FormButton';
 import FormFeedback from './components/form/FormFeedback';
+import authService from './services/auth.service';
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -28,6 +29,12 @@ const useStyles = makeStyles((theme) => ({
 function SignUp() {
   const classes = useStyles();
   const [sent, setSent] = React.useState(false);
+  const [firstName,setFirstName] = useState(null);
+  const [lastName,setLastName] = useState(null);
+  const [password,setPassword] = useState(null);
+  const [message, setMessage] = useState(null);
+  const [username, setUserName] = useState(null);
+  const [userEmail, setUserEmail] = useState(null);
 
   const validate = (values) => {
     const errors = required(['firstName', 'lastName', 'email', 'password'], values);
@@ -37,13 +44,28 @@ function SignUp() {
       if (emailError) {
         errors.email = email(values.email, values);
       }
+      setFirstName(values.firstName)
+      setLastName(values.lastName)
+      setPassword(values.password)
+      setUserName(values.email)
+      setUserEmail(values.email)
     }
 
     return errors;
   };
 
-  const handleSubmit = () => {
-    setSent(true);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    authService.register(firstName,lastName, username, userEmail,password)
+    .then(error => {
+      const resMessage =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+        setMessage(resMessage)
+    }).then(setSent(true));
   };
 
   return (
@@ -61,8 +83,8 @@ function SignUp() {
           </Typography>
         </React.Fragment>
         <Form onSubmit={handleSubmit} subscription={{ submitting: true }} validate={validate}>
-          {({ handleSubmit2, submitting }) => (
-            <form onSubmit={handleSubmit2} className={classes.form} noValidate>
+          {({submitting }) => (
+            <form onSubmit={handleSubmit} className={classes.form} noValidate>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <Field

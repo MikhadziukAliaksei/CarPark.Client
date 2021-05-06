@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React , {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import DCarForm from './form/DCarForm';
-import { useSpring, animated } from 'react-spring';
+import Fade from '@material-ui/core/Fade';
+import { Grid, TextField, withStyles, FormControl, InputLabel, Select, MenuItem, Button, FormHelperText } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
     modal: {
@@ -20,40 +20,10 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Fade = React.forwardRef(function Fade(props, ref) {
-    const { in: open, children, onEnter, onExited, ...other } = props;
-    const style = useSpring({
-        from: { opacity: 0 },
-        to: { opacity: open ? 1 : 0 },
-        onStart: () => {
-            if (open && onEnter) {
-                onEnter();
-            }
-        },
-        onRest: () => {
-            if (!open && onExited) {
-                onExited();
-            }
-        },
-    });
-
-    return (
-        <animated.div ref={ref} style={style} {...other}>
-            {children}
-        </animated.div>
-    );
-});
-
-Fade.propTypes = {
-    children: PropTypes.element,
-    in: PropTypes.bool.isRequired,
-    onEnter: PropTypes.func,
-    onExited: PropTypes.func,
-};
-
 export default function CarAddModal() {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
+    const [currentId, setCurrentId] = useState(0)
 
     const handleOpen = () => {
         setOpen(true);
@@ -65,18 +35,18 @@ export default function CarAddModal() {
 
     return (
         <div>
-            <Button
-                variant="contained"
-                color="primary"
-                type="submit"
-                className={classes.smMargin}
-                onClick = {handleOpen}
-            >
-                ADD NEW CAR
+             <Button
+                    variant="contained"
+                    color="primary"
+                    type="submit"
+                    className={classes.smMargin}
+                    onClick = {handleOpen}
+                >
+                    ADD NEW CAR
                 </Button>
             <Modal
-                aria-labelledby="spring-modal-title"
-                aria-describedby="spring-modal-description"
+                aria-labelledby="transition-modal-title"
+                aria-describedby="transition-modal-description"
                 className={classes.modal}
                 open={open}
                 onClose={handleClose}
@@ -87,7 +57,10 @@ export default function CarAddModal() {
                 }}
             >
                 <Fade in={open}>
-                    <DCarForm />
+                    <div className = {classes.paper}>
+                        <h2 id= "transition-modal-title">ADD NEW CAR</h2>
+                        <DCarForm {...({ currentId, setCurrentId })} />
+                    </div>
                 </Fade>
             </Modal>
         </div>
