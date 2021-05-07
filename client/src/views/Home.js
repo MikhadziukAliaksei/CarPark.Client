@@ -6,13 +6,13 @@ import { Container } from "@material-ui/core";
 import { ToastProvider } from "react-toast-notifications";
 
 export default function Home() {
-    return (
-            <Provider store={store}>
-          <ToastProvider autoDismiss={true}>
-            <Container maxWidth="lg">
-              <DCars />
-            </Container>
-          </ToastProvider>
-        </Provider>
-    )
+  return (
+    <Provider store={store}>
+      <ToastProvider autoDismiss={true}>
+        <Container maxWidth="lg">
+          <DCars />
+        </Container>
+      </ToastProvider>
+    </Provider>
+  )
 }
